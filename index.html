@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Walimatulurus Maisarah & Raja</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FDFFF5',
+                        emerald: {
+                            100: '#FCEAEA', // Latar belakang cair (RSVP dll)
+                            300: '#D48696',
+                            400: '#B56576', // Ikon Toast
+                            500: '#90293E', // Border & Focus Ring (Borang)
+                            600: '#7A1C2E',
+                            700: '#691322', // Hover butang
+                            800: '#580F1C', // Teks & Butang Utama (Maroon/Merah Hati)
+                            900: '#3A0811', // Latar belakang paling gelap (Menghitung Hari)
+                        },
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            light: '#F3E5AB',
+                            dark: '#AA8C2C',
+                        },
+                        blush: '#F8C8DC'
+                    },
+                    fontFamily: {
+                        script: ['"Great Vibes"', 'cursive'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Lato', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .bg-pattern {
+            background-color: #FDFFF5;
+            /* Default: Gambar Menegak untuk Telefon (9:16) */
+            background-image: url('https://iili.io/nIVSWlV.jpg'); 
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        /* Enjin Pengesan Peranti: Tukar ke Gambar Melintang jika skrin lebar (Laptop/PC) */
+        @media (min-aspect-ratio: 1/1) {
+            .bg-pattern {
+                background-image: url('https://iili.io/nIVQImQ.jpg');
+            }
+        }
+        
+        /* Lapisan penapis kuning telah dipadam supaya gambar latar belakang HD 100% jelas */
+
+        .cardboard {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .cardboard::after {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 1.25rem;
+            pointer-events: none;
+        }
+
+        .envelope-container {
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+        }
+        .envelope-open {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .wax-seal {
+            background: radial-gradient(circle, #691322 0%, #3A0811 100%);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 10px 15px rgba(0,0,0,0.3);
+            border: 2px solid #580F1C;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .wax-seal:hover {
+            transform: scale(1.05);
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.6), 0 15px 25px rgba(0,0,0,0.4);
+        }
+
+        .floral-corner {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23F8C8DC" opacity="0.6" d="M20,50 Q40,20 50,50 T80,50 Q60,80 50,50 T20,50 Z"/><circle cx="50" cy="50" r="10" fill="%23D4AF37" opacity="0.8"/></svg>');
+            background-repeat: no-repeat;
+            background-size: contain;
+            pointer-events: none;
+            opacity: 0.8;
+            z-index: 1;
+        }
+        .floral-top-left { top: -20px; left: -20px; transform: rotate(0deg); }
+        .floral-bottom-right { bottom: -20px; right: -20px; transform: rotate(180deg); }
+
+        .fade-in { animation: fadeIn 1s ease-in forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* MULA: Animasi Skrol (Lompatan Lembut) */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); /* Pergerakan sangat licin dan eksklusif */
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* TAMAT: Animasi Skrol */
+
+        .hidden-view { display: none !important; }
+
+        /* MULA: CSS KARUSEL 3D KACA */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        
+        .wish-card {
+            width: 85%;
+            max-width: 350px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 1.5rem;
+            padding: 2.5rem 1.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.8) rotateY(15deg) translateZ(-50px);
+            opacity: 0.4;
+            text-align: center;
+        }
+        
+        .wish-card.active-card {
+            transform: scale(1) rotateY(0deg) translateZ(0);
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(212, 175, 55, 0.5); /* Border emas */
+        }
+
+        .wish-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            line-height: 1.4;
+            color: #580F1C; /* Tema Merah Hati Gelap */
+            margin-bottom: 0.5rem;
+        }
+
+        .wish-author {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #AA8C2C; /* Tema Emas */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        /* TAMAT: CSS KARUSEL 3D KACA */
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FDFFF5; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+    </style>
+</head>
+<body class="text-gray-800 h-screen w-screen overflow-hidden">
+
+    <!-- Toast Notification System -->
+    <div id="toast-container" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+<!-- Toast Notification System -->
+    <div id="toast-container" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- MULA: SISTEM AUDIO LAGU -->
+    <audio id="bg-music" loop>
+        <!-- NOTA GITHUB: Sila muat naik fail MP3 cikgu ke dalam repository GitHub yang sama dengan fail HTML ini. -->
+        <!-- Pastikan nama fail MP3 tersebut tepat sama dengan nama di bawah: -->
+        <source src="lagu_kahwin.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Butang Muzik 3D -->
+    <button id="music-btn" onclick="toggleMusic()" class="hidden-view fixed bottom-6 right-6 z-[60] w-14 h-14 bg-emerald-700 hover:bg-emerald-600 text-gold-light rounded-full flex items-center justify-center text-2xl transition-all active:translate-y-[4px] shadow-[0_5px_0_#3A0811,0_10px_15px_rgba(0,0,0,0.4)] active:shadow-none border border-emerald-500/50 outline-none">
+        <i id="music-icon" class="fas fa-compact-disc animate-[spin_3s_linear_infinite]"></i>
+    </button>
+    <!-- TAMAT: SISTEM AUDIO LAGU -->
+
+    <!-- [PAPARAN 1] UI Hadapan (Envelope) -->
+    <div id="envelope-view" class="envelope-container fixed inset-0 z-50 flex flex-col items-center justify-center bg-cream shadow-2xl">
+    <!-- [PAPARAN 1] UI Hadapan (Envelope) -->
+    <div id="envelope-view" class="envelope-container fixed inset-0 z-50 flex flex-col items-center justify-center bg-cream shadow-2xl">
+        <div class="absolute top-0 w-full h-1/2 bg-white shadow-sm" style="clip-path: polygon(0 0, 100% 0, 50% 100%);"></div>
+        <div class="absolute bottom-0 w-full h-1/2 bg-white/50" style="clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% 50%, 0 0);"></div>
+        
+        <div class="z-10 text-center flex flex-col items-center px-4">
+
+            <h1 class="font-serif text-2xl text-emerald-900 tracking-widest mb-4">WALIMATULURUS</h1>
+            <h2 class="font-script text-5xl text-gold-dark mb-12">Maisarah & Raja</h2>
+            
+            <button onclick="openInvitation()" class="wax-seal w-24 h-24 rounded-full flex flex-col items-center justify-center text-white cursor-pointer relative group">
+                <span class="font-serif font-bold tracking-wider text-sm">BUKA</span>
+                <div class="absolute inset-2 rounded-full border border-white/30 border-dashed pointer-events-none"></div>
+            </button>
+            <p class="mt-4 text-xs text-gray-500 font-sans tracking-wide">Ketuk untuk membuka jemputan</p>
+        </div>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div id="main-content" class="hidden-view h-full w-full overflow-y-auto bg-pattern relative pb-20">
+        
+        <!-- Butang admin terapung telah dipadamkan (Akses rahsia dipindahkan ke ayat bawah) -->
+
+        <div class="max-w-md mx-auto w-full px-4 pt-10 pb-10 flex flex-col gap-8 relative z-10">
+
+            <!-- [PAPARAN 2] KADBOARD 1: MUKA DEPAN -->
+            <div class="cardboard p-8 text-center fade-in flex flex-col items-center justify-center min-h-[70vh]">
+                <div class="floral-corner floral-top-left"></div>
+                <div class="floral-corner floral-bottom-right"></div>
+                
+                <!-- Menarik imej asal Bismillah Khat Thuluth dari Pelayan Web Awam -->
+                <img src="https://iili.io/nI1gIBp.md.jpg" alt="Bismillah" class="w-64 sm:w-80 h-auto mb-6 drop-shadow-sm opacity-90" onerror="this.onerror=null;this.src='https://placehold.co/300x100/FDFFF5/022C22?text=Bismillah+Al-Rahman+Al-Rahim';">
+                
+                <h2 class="font-serif text-xl sm:text-2xl tracking-[0.3em] text-emerald-800 mb-6 uppercase">Walimatulurus</h2>
+                <h1 class="font-script text-5xl sm:text-6xl lg:text-7xl text-gold-dark mb-8 leading-tight">Maisarah & Raja</h1>
+                
+                <div class="mt-4">
+                    <p class="font-serif italic text-gray-700 text-sm sm:text-base px-4">
+                        "Dan Kami ciptakan kamu secara berpasang-pasangan"
+                    </p>
+                    <p class="font-sans text-xs text-gray-500 mt-2">An-Naba' 78:8</p>
+                </div>
+            </div>
+
+            <!-- [PAPARAN 3] KADBOARD 2: TEKS JEMPUTAN -->
+            <div class="cardboard p-8 text-center text-sm sm:text-base leading-relaxed text-gray-800">
+                <p class="mb-4">Dengan nama Allah yang Maha Penyayang.</p>
+                <p class="mb-6">Dengan penuh kesyukuran, kami</p>
+                
+                <div class="font-bold font-sans text-emerald-900 tracking-wide mb-6">
+                    <p>ZAHARUDDIN BIN ZAINUDDIN</p>
+                    <p class="text-gold-dark text-lg my-1">&</p>
+                    <p>SAFURA BINTI YAHYA</p>
+                </div>
+                
+                <p class="mb-4">berbesar hati ingin menjemput</p>
+                <p class="font-bold text-gray-900 mb-4 bg-gray-100 py-2 px-4 rounded-lg inline-block border border-gray-200 shadow-sm">Dato' | Datin | Tuan | Puan | Encik | Cik</p>
+                <p class="mb-6">seisi keluarga hadir ke majlis perkahwinan<br>puteri kami bersama pilihan hatinya,</p>
+                
+                <div class="font-script text-3xl sm:text-4xl text-gold-dark leading-normal my-4">
+                    <p>Nurul Maisarah binti Zaharuddin</p>
+                    <p class="text-2xl my-2 text-emerald-800">&</p>
+                    <p>Raja Muhamad Salaudin bin Raja Hasan</p>
+                </div>
+            </div>
+
+            <!-- [PAPARAN 4] KADBOARD 3: BUTIRAN MAJLIS -->
+            <div class="cardboard p-8 text-center">
+                <h3 class="font-serif font-bold text-lg text-emerald-800 tracking-widest mb-6 border-b border-gold/30 pb-2">BUTIRAN MAJLIS</h3>
+                
+                <div class="mb-6">
+                    <p class="text-xs text-gray-500 tracking-widest uppercase mb-1">Hari & Tarikh</p>
+                    <p class="font-bold text-gray-800 text-lg">Sabtu, 19 Disember 2026</p>
+                </div>
+                
+                <div class="mb-6">
+                    <p class="text-xs text-gray-500 tracking-widest uppercase mb-1">Masa</p>
+                    <p class="font-bold text-gray-800 text-lg">19:30 – 23:00</p>
+                </div>
+                
+                <div class="mb-8">
+                    <p class="text-xs text-gray-500 tracking-widest uppercase mb-1">Tempat</p>
+                    <p class="font-bold text-gray-800">Penchalang Resort (Harley Village),<br>Pasir Panjang, Seri Manjung, Perak</p>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full">
+                    <!-- Butang Google Maps -->
+                    <a href="https://maps.app.goo.gl/qnpY8CimM2W5taLbA?g_st=atm" target="_blank" class="inline-flex items-center justify-center gap-2 bg-emerald-100 border-2 border-emerald-800 text-emerald-800 px-6 py-3 rounded-full font-bold shadow-lg hover:bg-emerald-800 hover:text-white hover:shadow-xl transition-all transform hover:-translate-y-1 w-full sm:w-auto">
+                        <i class="fas fa-map-marked-alt text-lg"></i> Google Maps
+                    </a>
+                    
+                    <!-- Butang Waze -->
+                    <a href="https://waze.com/ul?q=Penchalang%20Resort%20Seri%20Manjung&navigate=yes" target="_blank" class="inline-flex items-center justify-center gap-2 bg-emerald-100 border-2 border-emerald-800 text-emerald-800 px-6 py-3 rounded-full font-bold shadow-lg hover:bg-emerald-800 hover:text-white hover:shadow-xl transition-all transform hover:-translate-y-1 w-full sm:w-auto">
+                        <i class="fab fa-waze text-xl"></i> Waze
+                    </a>
+                </div>
+            </div>
+
+            <!-- [PAPARAN 5] KADBOARD 4: MENGHITUNG HARI -->
+            <div class="cardboard p-8 text-center bg-emerald-100 border-2 border-emerald-800 shadow-xl relative overflow-hidden">
+                <div class="absolute inset-2 border border-emerald-800/30 rounded-xl pointer-events-none"></div>
+                
+                <h3 class="font-serif font-bold text-lg text-emerald-800 tracking-widest mb-6 relative z-10">MENGHITUNG HARI</h3>
+                
+                <div class="flex justify-center gap-3 sm:gap-4 relative z-10" id="countdown-timer">
+                    <div class="flex flex-col items-center">
+                        <div class="bg-emerald-800 border border-emerald-900 rounded-lg w-16 h-16 flex items-center justify-center shadow-md">
+                            <span id="cd-days" class="text-2xl font-bold text-white">00</span>
+                        </div>
+                        <span class="text-[10px] mt-2 uppercase tracking-wider text-emerald-800 font-bold">Hari</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="bg-emerald-800 border border-emerald-900 rounded-lg w-16 h-16 flex items-center justify-center shadow-md">
+                            <span id="cd-hours" class="text-2xl font-bold text-white">00</span>
+                        </div>
+                        <span class="text-[10px] mt-2 uppercase tracking-wider text-emerald-800 font-bold">Jam</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="bg-emerald-800 border border-emerald-900 rounded-lg w-16 h-16 flex items-center justify-center shadow-md">
+                            <span id="cd-mins" class="text-2xl font-bold text-white">00</span>
+                        </div>
+                        <span class="text-[10px] mt-2 uppercase tracking-wider text-emerald-800 font-bold">Minit</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="bg-emerald-800 border border-emerald-900 rounded-lg w-16 h-16 flex items-center justify-center shadow-md">
+                            <span id="cd-secs" class="text-2xl font-bold text-white">00</span>
+                        </div>
+                        <span class="text-[10px] mt-2 uppercase tracking-wider text-emerald-800 font-bold">Saat</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- [PAPARAN 6] KADBOARD 5: HUBUNGI -->
+            <div class="cardboard p-8 text-center">
+                <h3 class="font-serif font-bold text-lg text-emerald-800 tracking-widest mb-2">SEBARANG PERTANYAAN LANJUT</h3>
+                <p class="text-sm text-gray-500 mb-6">Sila hubungi:</p>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border border-gray-200">
+                        <span class="font-bold text-gray-800 text-sm text-left">En. Zaharuddin bin Zainuddin</span>
+                        <a href="https://wa.me/+60195777048" target="_blank" class="bg-[#25D366] text-white w-10 h-10 rounded-full flex items-center justify-center shadow hover:shadow-md hover:scale-105 transition-all shrink-0">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center justify-between bg-gray-50 p-4 rounded-xl border border-gray-200">
+                        <span class="font-bold text-gray-800 text-sm text-left">Pn. Siti Safura binti Yahya</span>
+                        <a href="https://wa.me/+601110612419" target="_blank" class="bg-[#25D366] text-white w-10 h-10 rounded-full flex items-center justify-center shadow hover:shadow-md hover:scale-105 transition-all shrink-0">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- [PAPARAN 7] KADBOARD 6: RSVP & UCAPAN -->
+            <div class="cardboard p-8" id="rsvp-section">
+                <h3 class="font-serif font-bold text-lg text-emerald-800 tracking-widest mb-6 text-center border-b border-gold/30 pb-2">RSVP & UCAPAN</h3>
+                
+                <div id="rsvp-choice" class="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+                    <button onclick="showRsvpForm('hadir')" class="flex-1 bg-emerald-800 text-white px-6 py-3 rounded-full font-bold shadow-lg hover:bg-emerald-700 transition">
+                        HADIR
+                    </button>
+                    <button onclick="showRsvpForm('tidak')" class="flex-1 bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-bold shadow hover:bg-gray-300 transition border border-gray-300">
+                        TIDAK HADIR
+                    </button>
+                </div>
+
+                <form id="form-hadir" class="hidden flex-col gap-4 mt-4 animate-[fadeIn_0.5s_ease]" onsubmit="submitRsvp(event, 'hadir')">
+                    <div class="text-center mb-2">
+                        <span class="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs font-bold tracking-wide">PENGESAHAN HADIR</span>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">NAMA</label>
+                        <input type="text" id="h-name" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none bg-white/50">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">NOMBOR TELEFON</label>
+                        <input type="tel" id="h-phone" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none bg-white/50">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">BILANGAN HADIR</label>
+                        <div class="flex items-center w-full border border-gray-300 rounded-lg bg-white/50 overflow-hidden shadow-sm">
+                            <!-- Butang Tolak -->
+                            <button type="button" onclick="updatePax(-1)" class="w-14 h-11 flex items-center justify-center bg-gray-100 hover:bg-gray-200 text-gray-600 transition outline-none border-r border-gray-300">
+                                <i class="fas fa-minus text-sm"></i>
+                            </button>
+                            
+                            <!-- Paparan Nombor -->
+                            <input type="number" id="h-pax" required min="1" max="20" value="1" readonly class="flex-1 h-11 text-center font-bold text-emerald-800 text-lg bg-transparent focus:outline-none pointer-events-none appearance-none">
+                            
+                            <!-- Butang Tambah -->
+                            <button type="button" onclick="updatePax(1)" class="w-14 h-11 flex items-center justify-center bg-emerald-800 hover:bg-emerald-700 text-white transition outline-none border-l border-gray-300">
+                                <i class="fas fa-plus text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">UCAPAN</label>
+                        <textarea id="h-wishes" rows="3" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none bg-white/50 resize-none"></textarea>
+                    </div>
+                    <div class="flex gap-2 mt-2">
+                        <button type="button" onclick="resetRsvpView()" class="px-4 py-2 rounded-lg text-gray-500 font-bold hover:bg-gray-100 transition">Batal</button>
+                        <button type="submit" id="btn-submit-hadir" class="flex-1 bg-emerald-800 text-white px-4 py-2 rounded-lg font-bold shadow hover:bg-emerald-700 transition flex items-center justify-center gap-2">
+                            <span>HANTAR</span>
+                        </button>
+                    </div>
+                </form>
+
+                <form id="form-tidak" class="hidden flex-col gap-4 mt-4 animate-[fadeIn_0.5s_ease]" onsubmit="submitRsvp(event, 'tidak')">
+                    <div class="text-center mb-2">
+                        <span class="inline-block bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-bold tracking-wide">MAAF, TIDAK DAPAT HADIR</span>
+                    </div>
+                   <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">NAMA</label>
+                        <input type="text" id="t-name" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none bg-white/50">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">NOMBOR TELEFON</label>
+                        <input type="tel" id="t-phone" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none bg-white/50">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">UCAPAN</label>
+                        <textarea id="t-wishes" required rows="4" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none bg-white/50 resize-none"></textarea>
+                    </div>
+                    <div class="flex gap-2 mt-2">
+                        <button type="button" onclick="resetRsvpView()" class="px-4 py-2 rounded-lg text-gray-500 font-bold hover:bg-gray-100 transition">Batal</button>
+                        <button type="submit" id="btn-submit-tidak" class="flex-1 bg-gray-700 text-white px-4 py-2 rounded-lg font-bold shadow hover:bg-gray-800 transition flex items-center justify-center gap-2">
+                            <span>HANTAR</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div id="rsvp-success" class="hidden text-center mt-6 animate-[fadeIn_0.5s_ease]">
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">Terima Kasih!</h4>
+                    <p class="text-sm text-gray-600">Maklum balas dan ucapan anda telah direkodkan.</p>
+                </div>
+            </div>
+
+            <!-- MULA: PAPARAN UCAPAN (KARUSEL KACA 3D) -->
+            <div class="mt-12 mb-4 relative z-20">
+                <h3 class="font-serif font-bold text-lg text-emerald-800 tracking-widest mb-2 text-center border-b border-gold/30 pb-2 mx-8">TITIPAN DOA & UCAPAN</h3>
+                
+                <div id="carousel-container" class="relative w-full overflow-hidden py-8">
+                    <!-- Senarai Ucapan Live akan dimasukkan ke sini -->
+                    <div id="wishes-track" class="flex transition-transform duration-500 ease-out items-center">
+                        <div class="w-full text-center text-sm text-gray-500 italic">Menarik ucapan tetamu...</div>
+                    </div>
+                    
+                    <!-- Butang Kawalan -->
+                    <button onclick="moveCarousel(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 z-30 bg-white/60 backdrop-blur border border-emerald-800/20 text-emerald-800 w-10 h-10 rounded-full flex items-center justify-center shadow hover:bg-emerald-800 hover:text-white transition">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button onclick="moveCarousel(1)" class="absolute right-2 top-1/2 -translate-y-1/2 z-30 bg-white/60 backdrop-blur border border-emerald-800/20 text-emerald-800 w-10 h-10 rounded-full flex items-center justify-center shadow hover:bg-emerald-800 hover:text-white transition">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- TAMAT: PAPARAN UCAPAN -->
+            
+            <p class="text-center text-xs text-gray-400 mt-4">
+                Dibina dengan penuh kasih sayang 
+                <i onclick="showAdminLogin()" class="fas fa-heart text-emerald-800/40 hover:text-emerald-800 cursor-pointer transition-colors ml-1"></i>
+            </p>
+        </div>
+    </div>
+
+    <!-- [PAPARAN 8] ADMIN LOGIN MODAL -->
+    <div id="admin-login-modal" class="hidden-view fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm animate-[fadeIn_0.3s_ease]">
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h2 class="font-bold text-xl text-gray-800">Log Masuk Admin</h2>
+                <p class="text-xs text-gray-500 mt-1">Masukkan kata laluan untuk akses dashboard</p>
+            </div>
+            
+            <form onsubmit="handleAdminLogin(event)" class="flex flex-col gap-4">
+                <input type="password" id="admin-pwd" required placeholder="Kata Laluan" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-center tracking-widest">
+                <div class="flex gap-3 mt-2">
+                    <button type="button" onclick="closeAdminLogin()" class="flex-1 py-3 rounded-lg text-gray-600 font-bold hover:bg-gray-100 transition">Tutup</button>
+                    <button type="submit" class="flex-1 bg-emerald-800 text-white py-3 rounded-lg font-bold shadow hover:bg-emerald-700 transition">Masuk</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- [PAPARAN 8] DASHBOARD ADMIN -->
+    <div id="admin-dashboard" class="hidden-view fixed inset-0 z-50 bg-gray-50 overflow-y-auto">
+        <div class="bg-emerald-900 text-white p-4 shadow-md sticky top-0 z-10 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-chart-pie text-xl text-gold-light"></i>
+                <h1 class="font-bold text-lg">Dashboard Admin</h1>
+            </div>
+            <button onclick="logoutAdmin()" class="bg-red-500/20 text-red-100 hover:bg-red-500 hover:text-white px-4 py-2 rounded-lg text-sm font-bold transition">
+                Keluar
+            </button>
+        </div>
+
+        <div class="max-w-6xl mx-auto p-4 sm:p-6 pb-20">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                <div class="bg-white p-5 rounded-2xl shadow-sm border-l-4 border-emerald-500 relative overflow-hidden flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-bold text-gray-500 uppercase">Responden Hadir</p>
+                        <p class="text-4xl font-bold text-gray-800 mt-1" id="stat-hadir">0</p>
+                    </div>
+                    <i class="fas fa-user-check text-4xl text-emerald-100"></i>
+                </div>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border-l-4 border-gold relative overflow-hidden flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-bold text-gray-500 uppercase">Jumlah Tetamu (Pax)</p>
+                        <p class="text-4xl font-bold text-gray-800 mt-1" id="stat-pax">0</p>
+                    </div>
+                    <i class="fas fa-users text-4xl text-gold-light opacity-50"></i>
+                </div>
+                <div class="bg-white p-5 rounded-2xl shadow-sm border-l-4 border-red-400 relative overflow-hidden flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-bold text-gray-500 uppercase">Tidak Hadir</p>
+                        <p class="text-4xl font-bold text-gray-800 mt-1" id="stat-tidak">0</p>
+                    </div>
+                    <i class="fas fa-user-times text-4xl text-red-100"></i>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden mb-8">
+                <div class="bg-emerald-800 p-4 border-b border-gray-200 flex justify-between items-center">
+                    <h2 class="font-bold text-white text-lg flex items-center gap-2">
+                        <i class="fas fa-check-circle text-emerald-300"></i> Senarai Hadir
+                    </h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 border-b border-gray-200">
+                                <th class="p-3 font-bold w-12 text-center">Bil.</th>
+                                <th class="p-3 font-bold">Nama</th>
+                                <th class="p-3 font-bold w-32">No. Telefon</th>
+                                <th class="p-3 font-bold w-20 text-center">Pax</th>
+                                <th class="p-3 font-bold min-w-[200px]">Ucapan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-hadir" class="divide-y divide-gray-100 text-gray-800">
+                            <tr><td colspan="5" class="p-8 text-center text-gray-400">Memuatkan data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-gray-700 p-4 border-b border-gray-200 flex justify-between items-center">
+                    <h2 class="font-bold text-white text-lg flex items-center gap-2">
+                        <i class="fas fa-times-circle text-gray-400"></i> Senarai Tidak Hadir
+                    </h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 border-b border-gray-200">
+                                <th class="p-3 font-bold w-12 text-center">Bil.</th>
+                                <th class="p-3 font-bold">Nama</th>
+                                <th class="p-3 font-bold min-w-[250px]">Ucapan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-tidak" class="divide-y divide-gray-100 text-gray-800">
+                            <tr><td colspan="3" class="p-8 text-center text-gray-400">Memuatkan data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-wedding-app';
+        let db, auth;
+        let isFirebaseReady = false;
+
+        try {
+            const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : { projectId: "demo-project" };
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            
+            const initAuth = async () => {
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                    isFirebaseReady = true;
+                } catch (e) {
+                    console.error("Auth error:", e);
+                }
+            };
+            initAuth();
+            
+            // --- MULA: LOGIK KARUSEL KACA 3D (FIREBASE LIVE) ---
+            let currentCarouselIdx = 0;
+            let wishesList = [];
+            let autoPlayTimer = null;
+
+            window.moveCarousel = function(direction) {
+                if (wishesList.length === 0) return;
+                currentCarouselIdx += direction;
+                
+                // Pusing ke awal/akhir jika melepasi had
+                if (currentCarouselIdx < 0) currentCarouselIdx = wishesList.length - 1;
+                if (currentCarouselIdx >= wishesList.length) currentCarouselIdx = 0;
+                
+                updateCarouselUI();
+                resetAutoPlay();
+            };
+
+            function updateCarouselUI() {
+                const track = document.getElementById('wishes-track');
+                const cards = document.querySelectorAll('.wish-card');
+                if (!track || cards.length === 0) return;
+
+                cards.forEach((card, index) => {
+                    if (index === currentCarouselIdx) {
+                        card.classList.add('active-card');
+                    } else {
+                        card.classList.remove('active-card');
+                    }
+                });
+
+                // Gerakkan track ke sisi (100% per slide)
+                const translateX = -(currentCarouselIdx * 100); 
+                track.style.transform = `translateX(${translateX}%)`;
+            }
+
+            function resetAutoPlay() {
+                clearInterval(autoPlayTimer);
+                autoPlayTimer = setInterval(() => { window.moveCarousel(1); }, 4000); // Putar setiap 4 saat
+            }
+
+            // Fungsi tarik data "Live" dari Google Sheet (MENGGANTIKAN FIREBASE)
+            async function loadPublicWishes() {
+                // Pautan Google Apps Script cikgu ditambah dengan arahan '?action=read'
+                const gasUrl = "https://script.google.com/macros/s/AKfycbze6RELy8y_QWXXYTdkxNJVMrYTyRnVtIeZLQ6761046prNhXTtBpgw6CgrbnaBo4DUDg/exec?action=read";
+                
+                try {
+                    const response = await fetch(gasUrl);
+                    const result = await response.json();
+                    
+                    wishesList = [];
+                    if (result.status === "berjaya" && result.data) {
+                        result.data.forEach((row) => {
+                            // Hanya tarik data yang ada isi ucapan sahaja
+                            if (row.wishes && row.wishes.trim() !== '') {
+                                wishesList.push({
+                                    name: escapeHTML(row.name || 'Tetamu'),
+                                    text: escapeHTML(row.wishes)
+                                });
+                            }
+                        });
+                    }
+
+                    const track = document.getElementById('wishes-track');
+                    if (!track) return;
+
+                    if (wishesList.length === 0) {
+                        track.innerHTML = `<div class="w-full text-center text-sm text-gray-500 italic px-8">Belum ada ucapan. Jadilah yang pertama memberikan doa!</div>`;
+                        return;
+                    }
+
+                    // Bina kepingan kad kaca
+                    let html = '';
+                    wishesList.forEach((wish, idx) => {
+                        html += `
+                            <div class="w-full flex-shrink-0 flex justify-center perspective-1000 px-4">
+                                <div class="wish-card ${idx === 0 ? 'active-card' : ''}">
+                                    <div class="text-gold-dark text-3xl opacity-50 mb-2"><i class="fas fa-quote-left"></i></div>
+                                    <div class="wish-text">"${wish.text}"</div>
+                                    <div class="text-gold-dark text-3xl opacity-50 mt-2 mb-4"><i class="fas fa-quote-right"></i></div>
+                                    <div class="wish-author">&mdash; ${wish.name}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    track.innerHTML = html;
+                    currentCarouselIdx = 0;
+                    updateCarouselUI();
+                    resetAutoPlay();
+                    
+                } catch (error) {
+                    console.error("Gagal menarik data ucapan:", error);
+                }
+            }
+            
+            // Terus panggil data dari Google Sheet sebaik sahaja laman web dimuatkan
+            loadPublicWishes();
+            // --- TAMAT: LOGIK KARUSEL ---
+            
+        } catch (error) {
+            console.error("Firebase init failed:", error);
+        }
+
+        window.showToast = function(message, type = "success") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const bgColor = type === 'error' ? 'bg-red-500' : 'bg-gray-800';
+            toast.className = `${bgColor} text-white px-6 py-3 rounded-full shadow-lg font-bold text-sm transform transition-all duration-300 translate-y-[-20px] opacity-0 flex items-center gap-2`;
+            toast.innerHTML = type === 'error' ? `<i class="fas fa-exclamation-circle"></i> ${message}` : `<i class="fas fa-check-circle text-emerald-400"></i> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-[-20px]', 'opacity-0'), 10);
+            setTimeout(() => {
+                toast.classList.add('translate-y-[-20px]', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+       window.openInvitation = function() {
+            const envelope = document.getElementById('envelope-view');
+            const mainContent = document.getElementById('main-content');
+            envelope.classList.add('envelope-open');
+            
+            // Mainkan lagu latar & paparkan butang muzik 3D dengan kod pelindung ralat
+            const bgMusic = document.getElementById('bg-music');
+            if (bgMusic) {
+                let playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        // Muzik berjaya dimainkan
+                    }).catch(error => {
+                        // Tangkap ralat secara senyap supaya sistem tidak 'crashed' (Skrin Putih)
+                        console.log("Menunggu fail muzik dimuat naik ke GitHub...");
+                    });
+                }
+                document.getElementById('music-btn').classList.remove('hidden-view');
+            }
+
+            // Sediakan semua kotak kadboard untuk animasi skrol secara senyap-senyap
+            const allCardboards = document.querySelectorAll('.cardboard');
+            allCardboards.forEach((card, index) => {
+                // Kad muka depan (index 0) dibiarkan statik, kad di bawahnya kita pakaikan animasi
+                if(index > 0) {
+                    card.classList.add('reveal-up');
+                }
+            });
+
+            setTimeout(() => {
+                envelope.classList.add('hidden-view');
+                mainContent.classList.remove('hidden-view');
+                initScrollObserver(); // Aktifkan radar skrol selepas sampul hilang
+            }, 800);
+        }
+
+        // Radar untuk mengesan pergerakan skrol jari tetamu (Berulang Kali)
+        function initScrollObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active'); // Kotak melompat ke atas bila nampak
+                    } else {
+                        entry.target.classList.remove('active'); // Kotak "bersembunyi" semula bila di luar skrin
+                    }
+                });
+            }, {
+                threshold: 0.15, // Kotak akan muncul bila 15% bahagiannya masuk ke dalam skrin
+                rootMargin: "0px 0px -20px 0px"
+            });
+
+            document.querySelectorAll('.reveal-up').forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Logik Toggle Muzik (Main/Berhenti) dengan Pelindung Ralat
+        window.toggleMusic = function() {
+            const bgMusic = document.getElementById('bg-music');
+            const musicIcon = document.getElementById('music-icon');
+            
+            if (bgMusic.paused) {
+                let playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        musicIcon.classList.add('animate-[spin_3s_linear_infinite]');
+                        musicIcon.classList.replace('fa-music', 'fa-compact-disc');
+                        musicIcon.classList.remove('opacity-50');
+                    }).catch(error => {
+                        console.log("Gagal memutar butang. Fail muzik tiada.");
+                    });
+                }
+            } else {
+                bgMusic.pause();
+                musicIcon.classList.remove('animate-[spin_3s_linear_infinite]');
+                musicIcon.classList.replace('fa-compact-disc', 'fa-music');
+                musicIcon.classList.add('opacity-50');
+            }
+        }
+
+        // Logik Butang Tolak Tambah (Stepper)
+        window.updatePax = function(change) {
+            const input = document.getElementById('h-pax');
+            if (!input) return;
+            
+            let currentValue = parseInt(input.value) || 1;
+            let newValue = currentValue + change;
+            
+            // Hadkan pilihan supaya tidak kurang dari 1 dan maksimum 20 pax sahaja
+            if (newValue >= 1 && newValue <= 20) {
+                input.value = newValue;
+            }
+        }
+
+        const countDownDate = new Date("Dec 19, 2026 19:30:00").getTime();
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown-timer").innerHTML = "<div class='text-xl font-bold font-serif italic py-4 text-gold-light'>Majlis Sedang Berlangsung</div>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("cd-days").innerText = days.toString().padStart(2, '0');
+            document.getElementById("cd-hours").innerText = hours.toString().padStart(2, '0');
+            document.getElementById("cd-mins").innerText = minutes.toString().padStart(2, '0');
+            document.getElementById("cd-secs").innerText = seconds.toString().padStart(2, '0');
+        }, 1000);
+
+        window.showRsvpForm = function(type) {
+            document.getElementById('rsvp-choice').classList.add('hidden');
+            document.getElementById('form-hadir').classList.add('hidden');
+            document.getElementById('form-tidak').classList.add('hidden');
+            document.getElementById('rsvp-success').classList.add('hidden');
+            
+            if (type === 'hadir') document.getElementById('form-hadir').classList.remove('hidden');
+            if (type === 'tidak') document.getElementById('form-tidak').classList.remove('hidden');
+            
+            setTimeout(() => {
+                document.getElementById('rsvp-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+
+        window.resetRsvpView = function() {
+            document.getElementById('form-hadir').reset();
+            document.getElementById('form-tidak').reset();
+            document.getElementById('form-hadir').classList.add('hidden');
+            document.getElementById('form-tidak').classList.add('hidden');
+            document.getElementById('rsvp-success').classList.add('hidden');
+            document.getElementById('rsvp-choice').classList.remove('hidden');
+        }
+
+        window.resetRsvpView = function() {
+            document.getElementById('form-hadir').reset();
+            document.getElementById('form-tidak').reset();
+            document.getElementById('form-hadir').classList.add('hidden');
+            document.getElementById('form-tidak').classList.add('hidden');
+            document.getElementById('rsvp-success').classList.add('hidden');
+            document.getElementById('rsvp-choice').classList.remove('hidden');
+        }
+
+        window.submitRsvp = async function(e, type) {
+            e.preventDefault();
+
+            const btnId = type === 'hadir' ? 'btn-submit-hadir' : 'btn-submit-tidak';
+            const btn = document.getElementById(btnId);
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Menghantar...';
+            btn.disabled = true;
+
+           // Kumpul data dari borang mengikut jenis status
+            let name = type === 'hadir' ? document.getElementById('h-name').value : document.getElementById('t-name').value;
+            let phone = type === 'hadir' ? document.getElementById('h-phone').value : document.getElementById('t-phone').value;
+            let pax = type === 'hadir' ? document.getElementById('h-pax').value : "";
+            let wishes = type === 'hadir' ? document.getElementById('h-wishes').value : document.getElementById('t-wishes').value;
+            
+            // Encode data dan sambungkan ke URL Google Apps Script cikgu
+            const gasUrl = "https://script.google.com/macros/s/AKfycbze6RELy8y_QWXXYTdkxNJVMrYTyRnVtIeZLQ6761046prNhXTtBpgw6CgrbnaBo4DUDg/exec";
+            const requestUrl = `${gasUrl}?status=${encodeURIComponent(type)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&pax=${encodeURIComponent(pax)}&wishes=${encodeURIComponent(wishes)}`;
+
+            try {
+                // Tembak data ke Google Sheet melalui pautan Apps Script (Mode: no-cors elak sekatan pelayar)
+                await fetch(requestUrl, { mode: 'no-cors' });
+                
+                // Paparkan mesej berjaya jika tiada ralat kritikal
+                document.getElementById(`form-${type}`).classList.add('hidden');
+                document.getElementById('rsvp-success').classList.remove('hidden');
+                document.getElementById(`form-${type}`).reset();
+                showToast("Berjaya Disimpan ke Google Sheet!");
+                
+            } catch (error) {
+                console.error("Error submitting RSVP:", error);
+                showToast("Ralat menghantar data. Sila periksa capaian internet.", "error");
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        window.showAdminLogin = function() {
+            document.getElementById('admin-login-modal').classList.remove('hidden-view');
+            document.getElementById('admin-pwd').focus();
+        }
+
+        window.closeAdminLogin = function() {
+            document.getElementById('admin-login-modal').classList.add('hidden-view');
+            document.getElementById('admin-pwd').value = '';
+        }
+
+        let unsubscribeRsvps = null;
+
+        window.handleAdminLogin = function(e) {
+            e.preventDefault();
+            const pwd = document.getElementById('admin-pwd').value;
+            if (pwd === 'Ayah') {
+                closeAdminLogin();
+                document.getElementById('main-content').classList.add('hidden-view');
+                document.getElementById('admin-dashboard').classList.remove('hidden-view');
+                showToast("Log masuk berjaya");
+                loadAdminData();
+            } else {
+                showToast("Kata laluan salah", "error");
+                document.getElementById('admin-pwd').value = '';
+            }
+        }
+
+        window.logoutAdmin = function() {
+            if (unsubscribeRsvps) unsubscribeRsvps();
+            document.getElementById('admin-dashboard').classList.add('hidden-view');
+            document.getElementById('main-content').classList.remove('hidden-view');
+            showToast("Log keluar berjaya");
+        }
+
+        function escapeHTML(str) {
+            if (str === null || str === undefined) return '';
+            return String(str).replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag])
+            );
+        }
+
+        async function loadAdminData() {
+            const gasUrl = "https://script.google.com/macros/s/AKfycbze6RELy8y_QWXXYTdkxNJVMrYTyRnVtIeZLQ6761046prNhXTtBpgw6CgrbnaBo4DUDg/exec?action=read";
+            
+            try {
+                // Tunjuk efek loading semasa Google Sheet sedang dibaca
+                document.getElementById('table-hadir').innerHTML = '<tr><td colspan="5" class="p-8 text-center text-gray-500"><i class="fas fa-circle-notch fa-spin text-emerald-500 text-3xl mb-3"></i><br>Menarik pangkalan data...</td></tr>';
+                document.getElementById('table-tidak').innerHTML = '<tr><td colspan="3" class="p-8 text-center text-gray-500"><i class="fas fa-circle-notch fa-spin text-gray-400 text-3xl mb-3"></i><br>Menarik pangkalan data...</td></tr>';
+
+                const response = await fetch(gasUrl);
+                const result = await response.json();
+                
+                let countHadir = 0;
+                let countPax = 0;
+                let countTidak = 0;
+                let tbodyHadir = '';
+                let tbodyTidak = '';
+                let idxHadir = 1;
+                let idxTidak = 1;
+
+                if (result.status === "berjaya" && result.data) {
+                    result.data.forEach((data) => {
+                        // Baca barisan berstatus 'hadir'
+                        if (data.status === 'hadir') {
+                            countHadir++;
+                            countPax += parseInt(data.pax) || 0;
+                            tbodyHadir += `
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="p-3 border-b border-gray-100 text-center">${idxHadir++}</td>
+                                    <td class="p-3 border-b border-gray-100 font-bold">${escapeHTML(data.name)}</td>
+                                    <td class="p-3 border-b border-gray-100">${escapeHTML(data.phone)}</td>
+                                    <td class="p-3 border-b border-gray-100 text-center font-bold text-emerald-700">${data.pax || '-'}</td>
+                                    <td class="p-3 border-b border-gray-100 text-gray-500 italic text-xs whitespace-pre-wrap">${escapeHTML(data.wishes || '-')}</td>
+                                </tr>
+                            `;
+                        // Baca barisan berstatus 'tidak'
+                        } else if (data.status === 'tidak') {
+                            countTidak++;
+                            tbodyTidak += `
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="p-3 border-b border-gray-100 text-center">${idxTidak++}</td>
+                                    <td class="p-3 border-b border-gray-100 font-bold">${escapeHTML(data.name)}</td>
+                                    <td class="p-3 border-b border-gray-100 text-gray-500 italic text-xs whitespace-pre-wrap">${escapeHTML(data.wishes || '-')}</td>
+                                </tr>
+                            `;
+                        }
+                    });
+                }
+
+                // Kemaskini Nombor Statistik di atas
+                document.getElementById('stat-hadir').innerText = countHadir;
+                document.getElementById('stat-pax').innerText = countPax;
+                document.getElementById('stat-tidak').innerText = countTidak;
+
+                // Jika jadual kosong
+                if (countHadir === 0) tbodyHadir = '<tr><td colspan="5" class="p-8 text-center text-gray-400">Tiada rekod buat masa ini.</td></tr>';
+                if (countTidak === 0) tbodyTidak = '<tr><td colspan="3" class="p-8 text-center text-gray-400">Tiada rekod buat masa ini.</td></tr>';
+
+                // Tulis jadual
+                document.getElementById('table-hadir').innerHTML = tbodyHadir;
+                document.getElementById('table-tidak').innerHTML = tbodyTidak;
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                document.getElementById('table-hadir').innerHTML = '<tr><td colspan="5" class="p-8 text-center text-red-500">Ralat: Gagal menghubungi Google Sheet.</td></tr>';
+            }
+        }
+    </script>
+</body>
+</html>
