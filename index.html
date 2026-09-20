@@ -627,7 +627,7 @@
         // =========================================================================
         // 1. PEMBOLEHUBAH INDUK (SINGLE SOURCE OF TRUTH)
         // =========================================================================
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUNdVslSBUjEbqqW0BD_cyypNkL_u7_tej-SWL10eBnkKSD2GHMXBcZrmtOWLgRVBZ_g/exec";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxn5Gfd4WpfwobV3mtjTyqc7cBH13jJrj9-EAHTdwDxm3wOR5iBZ4WdP9fwh1QjH84eEw/exec";
 
         // =========================================================================
         // 2. LOGIK KARUSEL KACA 3D (GOOGLE SHEET)
@@ -673,9 +673,14 @@
                 const result = await response.json();
                 
                 wishesList = [];
+                const EVENT_ID = "MAISARAH_RAJA_2026"; // <-- KOD BARU
                 if (result.status === "berjaya" && result.data) {
+                    // Dapatkan indeks yang tepat dari struktur sheet baru
+                    // 0:TIMESTAMP, 1:eventId, 2:STATUS, 3:NAMA, 4:TELEFON, 5:PAX, 6:UCAPAN
                     result.data.forEach((row) => {
-                        if (row.wishes && row.wishes.trim() !== '') {
+                        // row.wishes merujuk kepada fungsi "read" di Apps Script
+                        // Apps Script akan memulangkan data objek
+                        if (row.eventId === EVENT_ID && row.wishes && row.wishes.trim() !== '') {
                             wishesList.push({
                                 name: escapeHTML(row.name || 'Tetamu'),
                                 text: escapeHTML(row.wishes)
@@ -882,13 +887,14 @@
             btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Menghantar...';
             btn.disabled = true;
 
-           let name = type === 'hadir' ? document.getElementById('h-name').value : document.getElementById('t-name').value;
+            const EVENT_ID = "MAISARAH_RAJA_2026"; // <-- KOD BARU: TUKAR ID INI UNTUK PELANGGAN LAIN
+            let name = type === 'hadir' ? document.getElementById('h-name').value : document.getElementById('t-name').value;
             let phone = type === 'hadir' ? document.getElementById('h-phone').value : document.getElementById('t-phone').value;
             let pax = type === 'hadir' ? document.getElementById('h-pax').value : "";
             let wishes = type === 'hadir' ? document.getElementById('h-wishes').value : document.getElementById('t-wishes').value;
             
-            // Memanggil Pembolehubah Induk SCRIPT_URL (Ditambah pemecah Cache browser menggunakan 'Date.now()')
-            const requestUrl = `${SCRIPT_URL}?status=${encodeURIComponent(type)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&pax=${encodeURIComponent(pax)}&wishes=${encodeURIComponent(wishes)}&t=${Date.now()}`;
+            // Memanggil Pembolehubah Induk SCRIPT_URL dengan eventId
+            const requestUrl = `${SCRIPT_URL}?eventId=${encodeURIComponent(EVENT_ID)}&status=${encodeURIComponent(type)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&pax=${encodeURIComponent(pax)}&wishes=${encodeURIComponent(wishes)}&t=${Date.now()}`;
 
             try {
                 await fetch(requestUrl, { mode: 'no-cors' });
@@ -975,8 +981,12 @@
                 let idxHadir = 1;
                 let idxTidak = 1;
 
+                const EVENT_ID = "MAISARAH_RAJA_2026"; // <-- KOD BARU
                 if (result.status === "berjaya" && result.data) {
                     result.data.forEach((data) => {
+                        // Tapis untuk papar data majlis pelanggan ini sahaja
+                        if (data.eventId !== EVENT_ID) return; // <-- KOD BARU
+                        
                         if (data.status === 'hadir') {
                             countHadir++;
                             countPax += parseInt(data.pax) || 0;
