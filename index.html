@@ -202,14 +202,13 @@
 </head>
 <body class="text-gray-800 h-screen w-screen overflow-hidden">
 
-    <!-- Toast Notification System -->
+   <!-- Toast Notification System -->
     <div id="toast-container" class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
     <!-- MULA: SISTEM AUDIO LAGU -->
-    <audio id="bg-music" loop>
-        <!-- NOTA GITHUB: Sila muat naik fail MP3 cikgu ke dalam repository GitHub yang sama dengan fail HTML ini. -->
-        <!-- Pastikan nama fail MP3 tersebut tepat sama dengan nama di bawah: -->
-        <source src="lagu_kahwin.mp3" type="audio/mpeg">
+    <audio id="bg-music" loop playsinline preload="auto">
+        <!-- NOTA GITHUB: Fail diletakkan sebagai lagu.mp3 berserta kompas arah './' -->
+        <source src="./lagu.mp3" type="audio/mpeg">
     </audio>
     
     <!-- Butang Muzik 3D -->
