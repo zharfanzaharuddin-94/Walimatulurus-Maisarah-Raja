@@ -632,7 +632,7 @@
         // =========================================================================
         // 1. PEMBOLEHUBAH INDUK (SINGLE SOURCE OF TRUTH)
         // =========================================================================
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw_BY7e6Sj_QA0bjF_cfhPGVqRPImnvoyPnDavWm8la8KbcQdNMwY8TtzDN3AzBYS96Ig/exec";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzIU5_LkvyNsQd-mKa_ewfVhiozQTcEfbRaegNI5NcgZJtE8F1lP2LEUYiZiHWjKI0Akw/exec";
 
         // =========================================================================
         // 2. LOGIK KARUSEL KACA 3D (GOOGLE SHEET)
@@ -887,13 +887,13 @@
             btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Menghantar...';
             btn.disabled = true;
 
-            let name = type === 'hadir' ? document.getElementById('h-name').value : document.getElementById('t-name').value;
+           let name = type === 'hadir' ? document.getElementById('h-name').value : document.getElementById('t-name').value;
             let phone = type === 'hadir' ? document.getElementById('h-phone').value : document.getElementById('t-phone').value;
             let pax = type === 'hadir' ? document.getElementById('h-pax').value : "";
             let wishes = type === 'hadir' ? document.getElementById('h-wishes').value : document.getElementById('t-wishes').value;
             
-            // Memanggil Pembolehubah Induk SCRIPT_URL
-            const requestUrl = `${SCRIPT_URL}?status=${encodeURIComponent(type)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&pax=${encodeURIComponent(pax)}&wishes=${encodeURIComponent(wishes)}`;
+            // Memanggil Pembolehubah Induk SCRIPT_URL (Ditambah pemecah Cache browser menggunakan 'Date.now()')
+            const requestUrl = `${SCRIPT_URL}?status=${encodeURIComponent(type)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&pax=${encodeURIComponent(pax)}&wishes=${encodeURIComponent(wishes)}&t=${Date.now()}`;
 
             try {
                 await fetch(requestUrl, { mode: 'no-cors' });
