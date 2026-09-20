@@ -592,36 +592,8 @@
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-wedding-app';
-        let db, auth;
-        let isFirebaseReady = false;
-
-        try {
-            const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : { projectId: "demo-project" };
-            const app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            auth = getAuth(app);
-            
-            const initAuth = async () => {
-                try {
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                    isFirebaseReady = true;
-                } catch (e) {
-                    console.error("Auth error:", e);
-                }
-            };
-            initAuth();
-            
-            // --- MULA: LOGIK KARUSEL KACA 3D (FIREBASE LIVE) ---
+    <script>
+            // --- MULA: LOGIK KARUSEL KACA 3D (GOOGLE SHEET) ---
             let currentCarouselIdx = 0;
             let wishesList = [];
             let autoPlayTimer = null;
@@ -719,10 +691,6 @@
             // Terus panggil data dari Google Sheet sebaik sahaja laman web dimuatkan
             loadPublicWishes();
             // --- TAMAT: LOGIK KARUSEL ---
-            
-        } catch (error) {
-            console.error("Firebase init failed:", error);
-        }
 
         window.showToast = function(message, type = "success") {
             const container = document.getElementById('toast-container');
