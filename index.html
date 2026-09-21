@@ -223,6 +223,64 @@
             }
         }
         /* TAMAT: CSS CETAKAN PDF A4 */
+
+        /* ==========================================
+           MULA: ENJIN GRAFIK PREMIUM VIP 
+           ========================================== */
+        
+        /* 1. Kesan Pantulan Cahaya Emas (Shimmer Effect) */
+        .shimmer-text {
+            background: linear-gradient(120deg, #AA8C2C 0%, #F3E5AB 40%, #ffffff 50%, #F3E5AB 60%, #AA8C2C 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes shimmer { to { background-position: 200% center; } }
+
+        /* Pantulan emas pada border kadbod */
+        .cardboard::after {
+            animation: borderShimmer 4s infinite ease-in-out;
+        }
+        @keyframes borderShimmer {
+            0% { border-color: rgba(212, 175, 55, 0.3); }
+            50% { border-color: rgba(243, 229, 171, 0.9); box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.2); }
+            100% { border-color: rgba(212, 175, 55, 0.3); }
+        }
+
+        /* 2. Animasi Tulisan Tangan (Calligraphy Reveal) */
+        .calligraphy-reveal {
+            opacity: 0;
+            clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+            animation: revealText 2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+            animation-delay: 1.2s; /* Menunggu pintu buku terbuka */
+        }
+        @keyframes revealText {
+            0% { opacity: 0; clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%); }
+            10% { opacity: 1; }
+            100% { opacity: 1; clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+        }
+
+        /* 3. Debu Emas Berterbangan (Fireflies/Particles) */
+        .firefly {
+            position: absolute;
+            background: radial-gradient(circle, #F3E5AB 0%, rgba(212,175,55,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 5;
+            animation: floatUp infinite linear;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+        }
+        /* ==========================================
+           TAMAT: ENJIN GRAFIK PREMIUM VIP 
+           ========================================== */
     </style>
 </head>
 <body class="text-gray-800 h-screen w-screen overflow-hidden">
@@ -269,6 +327,9 @@
     <!-- Main Content Wrapper -->
     <div id="main-content" class="hidden-view h-full w-full overflow-y-auto bg-pattern relative pb-20">
         
+        <!-- Bekas Serbuk Emas Berterbangan -->
+        <div id="fireflies-container" class="absolute inset-0 w-full h-[200%] overflow-hidden pointer-events-none z-0"></div>
+
         <!-- Butang admin terapung telah dipadamkan (Akses rahsia dipindahkan ke ayat bawah) -->
 
         <div class="max-w-md mx-auto w-full px-4 pt-10 pb-10 flex flex-col gap-8 relative z-10">
@@ -282,7 +343,7 @@
                 <img src="https://iili.io/nI1gIBp.md.jpg" alt="Bismillah" class="w-64 sm:w-80 h-auto mb-6 drop-shadow-sm opacity-90" onerror="this.onerror=null;this.src='https://placehold.co/300x100/FDFFF5/022C22?text=Bismillah+Al-Rahman+Al-Rahim';">
                 
                 <h2 class="font-serif text-xl sm:text-2xl tracking-[0.3em] text-emerald-800 mb-6 uppercase">Walimatulurus</h2>
-                <h1 class="font-script text-5xl sm:text-6xl lg:text-7xl text-gold-dark mb-8 leading-tight">Maisarah & Raja</h1>
+                <h1 class="font-script text-5xl sm:text-6xl lg:text-7xl mb-8 leading-tight shimmer-text calligraphy-reveal relative z-10">Maisarah & Raja</h1>
                 
                 <div class="mt-4">
                     <p class="font-serif italic text-gray-700 text-sm sm:text-base px-4">
@@ -1122,6 +1183,69 @@
                 }
             };
         }
+
+        // =========================================================================
+        // 8. ENJIN GRAFIK MAGIS (FIREFLIES, PARALLAX, GYROSCOPE)
+        // =========================================================================
+        function initMagicGraphics() {
+            // A. Penjana Serbuk Emas (Fireflies)
+            const container = document.getElementById('fireflies-container');
+            if (container) {
+                const particleCount = 30; // Jumlah debu emas
+                for (let i = 0; i < particleCount; i++) {
+                    let particle = document.createElement('div');
+                    particle.classList.add('firefly');
+                    // Kedudukan & saiz rawak
+                    let size = Math.random() * 8 + 3; // 3px to 11px
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.animationDuration = (Math.random() * 10 + 8) + 's'; // 8s to 18s
+                    particle.style.animationDelay = (Math.random() * 10) + 's';
+                    container.appendChild(particle);
+                }
+            }
+
+           // B. Kesan Kedalaman Skrol Parallax (Parallax Depth)
+            // (Logik Javascript dipadamkan kerana CSS 'background-attachment: fixed' 
+            // pada gambar asal sudah memadai untuk kesan Parallax yang sempurna dan stabil)
+
+            // C. Bayang-Bayang Mengikut Kecondongan Telefon (Gyroscope & Mouse)
+            const cards = document.querySelectorAll('.cardboard');
+            
+            // Untuk Laptop/PC (Pergerakan Mouse)
+            document.addEventListener('mousemove', (e) => {
+                let xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                let yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                applyDynamicShadow(xAxis, yAxis);
+            });
+
+            // Untuk Telefon Pintar (Sensor Tilt Gyroscope)
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', (e) => {
+                    // Gamma (kiri/kanan), Beta (depan/belakang)
+                    let xAxis = e.gamma ? e.gamma / 2 : 0; 
+                    let yAxis = e.beta ? (e.beta - 45) / 2 : 0; // -45 untuk sudut pegang telefon biasa
+                    
+                    // Limitkan pergerakan bayang supaya tidak melampau
+                    xAxis = Math.max(-15, Math.min(15, xAxis));
+                    yAxis = Math.max(-15, Math.min(15, yAxis));
+                    
+                    applyDynamicShadow(xAxis, yAxis);
+                });
+            }
+
+            function applyDynamicShadow(x, y) {
+                cards.forEach(card => {
+                    // Cipta ilusi kad itu timbul dari skrin
+                    card.style.boxShadow = `${x}px ${y}px 30px rgba(0,0,0,0.15), 0 8px 10px -6px rgba(0,0,0,0.1)`;
+                });
+            }
+        }
+
+        // Jalankan Enjin Magis selepas halaman siap dimuat
+        window.addEventListener('DOMContentLoaded', initMagicGraphics);
+
     </script>
 </body>
 </html>
